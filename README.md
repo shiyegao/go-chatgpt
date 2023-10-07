@@ -149,7 +149,7 @@ Account type: Team （设置正常）
 
 点击下面的按钮一键部署，缺点是免费版本冷启动比较慢
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/linweiyuan/go-chatgpt-api)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/shiyegao/go-chatgpt)
 
 ---
 
