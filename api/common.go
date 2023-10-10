@@ -82,14 +82,30 @@ func init() {
 	setupPUID()
 }
 
+type ProxyResponse struct {
+    Proxy string `json:"proxy"`
+}
+
+func getProxy() (string, error) {
+	response, _ := http.Get("http://gz:5010/get/")
+    defer response.Body.Close()
+
+    var proxyResponse ProxyResponse
+	if err := json.NewDecoder(response.Body).Decode(&proxyResponse); err != nil {
+        return "", err
+    }
+    return proxyResponse.Proxy, nil
+}
+
 func NewHttpClient() tls_client.HttpClient {
 	client := getHttpClient()
-
-	ProxyUrl = os.Getenv("PROXY")
-	if ProxyUrl != "" {
-		client.SetProxy(ProxyUrl)
-	}
-
+	// proxyURL, _ := getProxy()
+	// proxyURL = "http://" + proxyURL
+	proxyURL := ""
+	// fmt.Println("ProxyUrl set to:", proxyURL)
+	// ProxyUrl = os.Getenv("PROXY")
+	client.SetProxy(proxyURL)
+	// fmt.Println("ProxyUrl setted to:", client.GetProxy())
 	return client
 }
 

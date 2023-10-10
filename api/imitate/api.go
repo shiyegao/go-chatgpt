@@ -181,7 +181,10 @@ func sendConversationRequest(c *gin.Context, request chatgpt.CreateConversationR
 	if api.PUID != "" {
 		req.Header.Set("Cookie", "_puid="+api.PUID)
 	}
-	resp, err := api.Client.Do(req)
+	proxyClient := api.NewHttpClient()
+	fmt.Println("代理已成功配置", proxyClient.GetProxy())
+	// resp, err := api.Client.Do(req)
+	resp, err := proxyClient.Do(req)
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, api.ReturnMessage(err.Error()))
 		return nil, true
